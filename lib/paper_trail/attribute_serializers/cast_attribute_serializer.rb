@@ -46,7 +46,7 @@ module PaperTrail
       def serialize(attr, val)
         serialized = AttributeSerializerFactory.for(@klass, attr).serialize(val)
         case serialized
-        when Date, Time
+        when Date, Time, ActiveRecord::Type::Time::Value
           @klass.connection.type_cast(serialized)
         else
           serialized
